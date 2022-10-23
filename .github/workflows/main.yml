@@ -4,28 +4,15 @@ name: Daily-Wechat-Push
 # 这个部分用来指定能够触发工作流执行的事件
 on:
   workflow_dispatch:
-#   schedule:
-#     - cron:  '0 10 4 * * * *'
+  schedule:
+    - cron:  '30 4 * * *'
 
 
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - name: Working
       run: |
         npm i
