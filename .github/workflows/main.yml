@@ -1,0 +1,30 @@
+# name属性用来指定这个工作流的名字
+name: Daily-Wechat-Push
+
+# 这个部分用来指定能够触发工作流执行的事件
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '30 3 * * *'
+
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm i
+    - run: npm start
