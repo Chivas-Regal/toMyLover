@@ -4,8 +4,8 @@ name: Daily-Wechat-Push
 # 这个部分用来指定能够触发工作流执行的事件
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '0 10 4 * * * *'
+#   schedule:
+#     - cron:  '0 10 4 * * * *'
 
 
 
