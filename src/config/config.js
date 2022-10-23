@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 const params = {
   appid: 'wx52becdd5e225a35f',
   secret: 'f2c1571225d22855797cbe6a8e8e91fb',
-  touser: 'owLw-5tnMtyR-Zo9Gba9OY8zWpxY',
+  touser: 'owLw-5ijZBB2GxgMT9jheAXjqpzU',
   template_id: 'JthZOXjbbUSG-CUPnmny2D93p4vnSos1DOB713CVN4c',
 }
 
