@@ -5,15 +5,29 @@ name: Daily-Wechat-Push
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '30 4 * * *'
+    - cron:  '0 23 * * *'
 
 
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
-    - name: Working
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: working
       run: |
-        echo Hello World
-      
+        npm i
+        npm start
+
