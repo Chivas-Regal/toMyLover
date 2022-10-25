@@ -10,13 +10,17 @@ const params = {
 
 const api_url = 'https://devapi.qweather.com/v7/weather/3d?location=101180101&key=30a8036a37ae4bacadfac7b6bcf24bed'
 
+
 // 获取列表信息
 async function getHigh () {
     // 提取天气 api
     const response = await fetch(api_url)
     const data = await response.json()
-    // 提取日期
-    const today = new Date();
+    // 提取日期 国际时间23.00，日期加一天
+    let today = new Date()
+    today = today.setDate(today.getDate() + 1)
+    today = new Date(today)
+
     const year = today.getFullYear(), month = today.getMonth() + 1, day = today.getDate();
     const weekday_number = today.getDay();
     let weekday = ''
@@ -28,7 +32,7 @@ async function getHigh () {
     if (weekday_number == 5) weekday = '五';
     if (weekday_number == 6) weekday = '六';
     // 恋爱时间
-    const LoveTime = parseInt((new Date() - Date.parse('2022/10/11'))/1000/60/60/24)+1
+    const LoveTime = parseInt((new Date() - Date.parse('2022/10/11'))/1000/60/60/24)+2
     return {
         data: {
           nowDate: {
@@ -36,7 +40,7 @@ async function getHigh () {
             color: '#57E6E2',
           },
           weather: {
-            value: '白天' + data.daily[0].textDay + ' 晚间' + data.daily[0].textNight,
+            value: '白天' + data.daily[1].textDay + ' 晚间' + data.daily[1].textNight,
             color: '#FFCCFF'
           },
           city: {
@@ -44,11 +48,11 @@ async function getHigh () {
             color: '#9CA2A0',
           },
           low: {
-            value: data.daily[0].tempMin,
+            value: data.daily[1].tempMin,
             color: '#7CD47D',
           },
           high: {
-            value: data.daily[0].tempMax,
+            value: data.daily[1].tempMax,
             color: '#CBA476',
           },
           loveDate: {
